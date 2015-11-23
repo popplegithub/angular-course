@@ -1,5 +1,11 @@
 var app = angular.module('myApp', []);
 
+app.filter('content', function() {
+    return function(input) {
+        return input.substring(0, 9) + "...";
+    }
+});
+
 app.controller('BlogController', function() {
 
     var ctrl = this;
@@ -13,6 +19,13 @@ app.controller('BlogController', function() {
             content: ctrl.content,
             date: new Date()
         });
-        console.log(ctrl.list);
+        cleardata();
     }
+
+    function cleardata() {
+        delete ctrl.title;
+        delete ctrl.content;
+        delete ctrl.date;
+    }
+
 });
