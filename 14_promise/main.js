@@ -17,13 +17,27 @@ app.controller('PromiseController', function($timeout, $scope, $q) {
     chickenLover.then(function(data) {
         console.log("User: eat them all : " + data);
     }, function(data) {
-        console.error(data);
-        console.error("User: I'll go buy McDonald")
+        // console.error(data);
+        // console.error("User: I'll go buy McDonald")
+        if (data === "order changed") {
+            return "changed";
+        } else {
+            throw "error";
+        }
+    }).then(function(data) {
+        console.log("I'm alive!" + data);
+    }, function(data) {
+        console.log("I'm dead!" + data);
     });
 
-    $scope.stop = function() {
+    $scope.outOfChicken = function() {
         clearTimeout(order);
         kfcOfficer.reject("order canceled");
+    }
+
+    $scope.changeOrder = function() {
+        clearTimeout(order);
+        kfcOfficer.reject("order changed");
     }
     // $timeout(function() {
     // 	$scope.value = "Hello AngularJS!";

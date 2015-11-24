@@ -26,4 +26,5 @@ app.controller('BlogController', function($scope) {
         delete $scope.title;
         delete $scope.content;
     }
+
 });

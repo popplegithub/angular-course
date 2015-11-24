@@ -20,8 +20,11 @@
 </nav>
 
 <div class="container main-content" ng-controller="BlogController">
-
-  <table>
+			<div class="form-group">
+			<button class="btn btn-primary" ng-click="submitPost()">Post
+			</button>
+		</div>
+  		<table>
 	  	<tr ng-if="list.length > 0">
 			<td width="200px">Title</td>
 			<td width="250px">Content</td>
@@ -50,11 +53,6 @@
 		<div class="form-group">
 			<label for="content">Content</label>
 			<textarea rows="5" class="form-control" ng-model="content"></textarea>
-		</div>
-
-		<div class="form-group">
-			<button class="btn btn-primary" ng-click="submitPost()">Post
-			</button>
 		</div>
 	</form>
 </div>
