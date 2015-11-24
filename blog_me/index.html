@@ -19,15 +19,15 @@
 	</div>
 </nav>
 
-<div class="container main-content" ng-controller="BlogController as ctrl">
+<div class="container main-content" ng-controller="BlogController">
 
   <table>
-	  	<tr>
+	  	<tr ng-if="list.length > 0">
 			<td width="200px">Title</td>
 			<td width="250px">Content</td>
 			<td width="200px">Date</td>
 		</tr>	
-		<tr ng-repeat="list in ctrl.list">
+		<tr ng-repeat="list in list | orderBy:'-createdate' | limitTo:3">
 			<td>
 				<span>{{ list.title }}</span>
 			</td>
@@ -35,7 +35,7 @@
 				<span>{{ list.content | content }} </span>
 			</td>
 			<td>
-				<span>{{ list.date | date : "yyyy-MM-dd"}}</span>
+				<span>{{ list.createdate | date : "yyyy-MM-dd HH:mm:ss"}}</span>
 			</td>
 		</tr>
 		</table>
@@ -44,16 +44,16 @@
 	<form>
 		<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" class="form-control" ng-model="ctrl.title">
+			<input type="text" class="form-control" ng-model="title">
 		</div>
 
 		<div class="form-group">
 			<label for="content">Content</label>
-			<textarea rows="10" class="form-control" ng-model="ctrl.content"></textarea>
+			<textarea rows="5" class="form-control" ng-model="content"></textarea>
 		</div>
 
 		<div class="form-group">
-			<button class="btn btn-primary" ng-click="ctrl.submitPost()">Post
+			<button class="btn btn-primary" ng-click="submitPost()">Post
 			</button>
 		</div>
 	</form>

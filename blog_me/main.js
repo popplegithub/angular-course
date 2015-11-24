@@ -2,30 +2,28 @@ var app = angular.module('myApp', []);
 
 app.filter('content', function() {
     return function(input) {
-        return input.substring(0, 9) + "...";
+        if (input.length > 10) {
+            return input.substring(0, 9) + "...";
+        }
+        return input;
     }
 });
 
-app.controller('BlogController', function() {
-
-    var ctrl = this;
-    ctrl.submitPost = submitPost;
-
-    ctrl.list = [];
-
-    function submitPost() {
-        ctrl.list.push({
-            title: ctrl.title,
-            content: ctrl.content,
-            date: new Date()
-        });
-        cleardata();
+app.controller('BlogController', function($scope) {
+    $scope.list = [];
+    $scope.submitPost = function() {
+        if ($scope.title !== undefined && $scope.content != undefined) {
+            $scope.list.push({
+                title: $scope.title,
+                content: $scope.content,
+                createdate: new Date()
+            });
+            cleardata();
+        }
     }
 
     function cleardata() {
-        delete ctrl.title;
-        delete ctrl.content;
-        delete ctrl.date;
+        delete $scope.title;
+        delete $scope.content;
     }
-
 });
